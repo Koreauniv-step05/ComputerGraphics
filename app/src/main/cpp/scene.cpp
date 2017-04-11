@@ -53,7 +53,12 @@ void Scene::update(float deltaTime) {
     program->use();
 
     // rotate the camera relative to the object
+    // todo step2
 //    camera->eye = ;
+    // todo step3
+    // submit 2 files only
+    // • Vertex shader file (app/src/main/assets/vertex.glsl)
+    // • Scene class file (app/src/main/cpp/scene.cpp)
 
     // setup camera and light
     camera->setup();

@@ -14,9 +14,10 @@ out vec3 v_lightDir;
 void main() {
 
     // fill in the lines below
-//    gl_Position = ;
-//    v_normal = ;
-//    v_texCoord = ;
+    // todo step1
+    gl_Position = viewMat * worldMat * worldMat * vec4(position, 1.0);
+    v_normal = mat3(worldMat) * normal;
+    v_texCoord = texCoord;
 
     // do not touch below
     vec3 posWS = (worldMat * vec4(position, 1.0)).xyz;
