@@ -37,9 +37,8 @@ void Scene::setup(AAssetManager* aAssetManager) {
     // create teapot object
     teapot = new Object(program, flower, objTeapotVertices, objTeapotIndices,
                         objTeapotVerticesSize, objTeapotIndicesSize);
-    teapot->worldMatrix = scale(vec3(0.5f, 1.0f, 1.5f));
-    //                          * rotate(radians(60.0f), vec3(1.0f, 1.0f, 0.0f));
-
+    teapot->worldMatrix = scale(vec3(0.5f, 1.0f, 1.5f))
+                          * rotate(radians(60.0f), vec3(1.0f, 1.0f, 0.0f));
 }
 
 void Scene::screen(int width, int height) {
@@ -54,16 +53,13 @@ void Scene::update(float deltaTime) {
     program->use();
 
     // rotate the camera relative to the object
-    // todo step2
-    mat4 rotmat= rotate( radians(1.0f), vec3(1.0f, 1.0f, 0.0f));
-    //rotmat;
+    mat4 rotmat = rotate(radians(1.0f), vec3(0.0f, 1.0f, 0.0f));
     camera->eye = vec3(rotmat*vec4(camera->eye, 0.1f));
-    // todo step3
     // submit 2 files only
     // • Vertex shader file (app/src/main/assets/vertex.glsl)
     // • Scene class file (app/src/main/cpp/scene.cpp)
 
-    // setup camera and light
+    // setup camera and lighta
     camera->setup();
     light->setup();
 
