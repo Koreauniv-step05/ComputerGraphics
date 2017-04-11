@@ -15,7 +15,7 @@ void main() {
 
     // fill in the lines below
     // todo step1
-    gl_Position = viewMat * worldMat * worldMat * vec4(position, 1.0);
+    gl_Position = projMat * viewMat * worldMat * vec4(position, 1.0);
     v_normal = mat3(worldMat) * normal;
     v_texCoord = texCoord;
 

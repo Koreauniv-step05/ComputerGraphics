@@ -1,0 +1,23 @@
+# ninja log v5
+9	1738	0	CMakeFiles/native-lib.dir/src/main/cpp/camera.cpp.o	de524b95f3a203b1
+11	1784	0	CMakeFiles/native-lib.dir/src/main/cpp/program.cpp.o	90823986237b19c1
+7	2218	0	CMakeFiles/native-lib.dir/src/main/cpp/object.cpp.o	b4c2ccff27df58b7
+3	2236	0	CMakeFiles/native-lib.dir/src/main/cpp/asset.cpp.o	4b4ac663633b1055
+1	2385	0	CMakeFiles/native-lib.dir/src/main/cpp/material.cpp.o	5e84f3fac52b3a94
+5	2437	0	CMakeFiles/native-lib.dir/src/main/cpp/shader.cpp.o	f97612b85700b1bd
+1784	3141	0	CMakeFiles/native-lib.dir/src/main/cpp/main.cpp.o	684fb47d3d72e960
+1742	3223	0	CMakeFiles/native-lib.dir/src/main/cpp/light.cpp.o	60636fc72d06da1c
+2218	3735	0	CMakeFiles/native-lib.dir/src/main/cpp/scene.cpp.o	54893b5cab5ae84f
+3735	3969	0	../../../../build/intermediates/cmake/debug/obj/mips/libnative-lib.so	b458cc4925af5168
+4	1128	0	CMakeFiles/native-lib.dir/src/main/cpp/scene.cpp.o	54893b5cab5ae84f
+1128	1246	0	../../../../build/intermediates/cmake/debug/obj/mips/libnative-lib.so	b458cc4925af5168
+4	1184	0	CMakeFiles/native-lib.dir/src/main/cpp/scene.cpp.o	54893b5cab5ae84f
+1185	1315	0	../../../../build/intermediates/cmake/debug/obj/mips/libnative-lib.so	b458cc4925af5168
+4	1207	0	CMakeFiles/native-lib.dir/src/main/cpp/scene.cpp.o	54893b5cab5ae84f
+1208	1323	0	../../../../build/intermediates/cmake/debug/obj/mips/libnative-lib.so	b458cc4925af5168
+5	1120	0	CMakeFiles/native-lib.dir/src/main/cpp/scene.cpp.o	54893b5cab5ae84f
+1120	1236	0	../../../../build/intermediates/cmake/debug/obj/mips/libnative-lib.so	b458cc4925af5168
+4	1155	0	CMakeFiles/native-lib.dir/src/main/cpp/scene.cpp.o	54893b5cab5ae84f
+1155	1270	0	../../../../build/intermediates/cmake/debug/obj/mips/libnative-lib.so	b458cc4925af5168
+4	1374	0	CMakeFiles/native-lib.dir/src/main/cpp/scene.cpp.o	54893b5cab5ae84f
+1374	2061	0	../../../../build/intermediates/cmake/debug/obj/mips/libnative-lib.so	b458cc4925af5168
