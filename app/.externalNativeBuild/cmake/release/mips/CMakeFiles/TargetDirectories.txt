@@ -1,3 +1,0 @@
-C:/Users/Lim/AndroidStudioProjects/ComputerGraphics/app/.externalNativeBuild/cmake/release/mips/CMakeFiles/native-lib.dir
-C:/Users/Lim/AndroidStudioProjects/ComputerGraphics/app/.externalNativeBuild/cmake/release/mips/CMakeFiles/edit_cache.dir
-C:/Users/Lim/AndroidStudioProjects/ComputerGraphics/app/.externalNativeBuild/cmake/release/mips/CMakeFiles/rebuild_cache.dir
