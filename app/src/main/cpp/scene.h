@@ -32,6 +32,7 @@ public:
 private:
     static void lightMovement(float deltaTime);
     static void arcball();
+    static vec3 arcballVector(vec2 position);
 };
 
 #endif // OPENGLES_SCENE_H

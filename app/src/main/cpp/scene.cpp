@@ -1,3 +1,4 @@
+#include <sstream>
 #include "scene.h"
 
 Shader* Scene::vertexShader = nullptr;
@@ -104,5 +105,46 @@ void Scene::lightMovement(float deltaTime) {
 void Scene::arcball() {
 
     // implement arcball
+    static float last_mx, last_my;
+    static float cur_mx, cur_my;
+
+    if(Touch::motion == Touch::Motion::DOWN) {
+        LOG_PRINT_DEBUG("arcball/Touch::Motion::DOWN");
+        last_mx = cur_mx = Touch::position.x;
+        last_my = cur_my = Touch::position.y;
+    }
+    if(Touch::motion == Touch::Motion::MOVE) {
+        LOG_PRINT_DEBUG("arcball/Touch::Motion::MOVE");
+        cur_mx = Touch::position.x;
+        cur_my = Touch::position.y;
+
+        if (cur_mx != last_mx || cur_my != last_my) {
+            vec3 va = arcballVector(vec2(last_mx, last_my));
+            vec3 vb = arcballVector(vec2(cur_mx, cur_my));
+            float angle = acos(dot(va, vb));
+            LOG_PRINT_DEBUG("arcball/angle=%f", angle);
+//            mat3 camera2object = inverse(mat3(transforms[MODE_CAMERA]) *
+//                                         mat3(mesh.object2world));
+//            vec3 axis_in_object_coord = camera2object * axis_in_camera_coord;
+//            mesh.object2world = rotate(mesh.object2world, degrees(angle), axis_in_object_coord);
+            last_mx = cur_mx;
+            last_my = cur_my;
+        }
+    }
 
 }
+
+vec3 Scene::arcballVector(vec2 position) {
+    vec3 P = vec3(1.0 * position.x/Screen::width * 2 - 1.0,
+                  1.0 * position.y/Screen::height * 2 - 1.0,
+                  0);
+    P.y = -P.y;
+    float OP_squared = P.x * P.x + P.y * P.y;
+    if (OP_squared <= 1*1)
+        P.z = sqrt(1*1 - OP_squared);
+    else
+        P = normalize(P);
+
+    return P;
+}
+
