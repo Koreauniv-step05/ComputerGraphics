@@ -102,49 +102,80 @@ void Scene::lightMovement(float deltaTime) {
     rightLight->position = p * startR + (1.0f - p) * endR;
 }
 
+
+float last_mx =0, last_my = 0;
+float cur_mx=0, cur_my=0;
+float firstThetaFlag;
+
+vec3 first_down_vec;
+vec3 up_vec;
+vec3 down_vec;
+
+bool firstUpFlag = false;
+
 void Scene::arcball() {
+    if(Touch::motion == Touch::Motion::DOWN){
+        firstThetaFlag = true;
+        firstUpFlag = true;
 
-    // implement arcball
-    static float last_mx, last_my;
-    static float cur_mx, cur_my;
-
-    if(Touch::motion == Touch::Motion::DOWN) {
-        LOG_PRINT_DEBUG("arcball/Touch::Motion::DOWN");
         last_mx = cur_mx = Touch::position.x;
         last_my = cur_my = Touch::position.y;
+        __android_log_print(ANDROID_LOG_DEBUG, "Motion::DOWN", "last_mx=%f, last_my=%f, cur_mx=%f, cur_my=%f",last_mx,last_my,cur_mx,cur_my);
     }
+
     if(Touch::motion == Touch::Motion::MOVE) {
-        LOG_PRINT_DEBUG("arcball/Touch::Motion::MOVE");
         cur_mx = Touch::position.x;
         cur_my = Touch::position.y;
+        __android_log_print(ANDROID_LOG_DEBUG, "Motion::MOVE", "last_mx=%f, last_my=%f, cur_mx=%f, cur_my=%f",last_mx,last_my,cur_mx,cur_my);
 
-        if (cur_mx != last_mx || cur_my != last_my) {
-            vec3 va = arcballVector(vec2(last_mx, last_my));
-            vec3 vb = arcballVector(vec2(cur_mx, cur_my));
-            float angle = acos(dot(va, vb));
-            LOG_PRINT_DEBUG("arcball/angle=%f", angle);
-//            mat3 camera2object = inverse(mat3(transforms[MODE_CAMERA]) *
-//                                         mat3(mesh.object2world));
-//            vec3 axis_in_object_coord = camera2object * axis_in_camera_coord;
-//            mesh.object2world = rotate(mesh.object2world, degrees(angle), axis_in_object_coord);
+        if (last_mx != cur_mx || last_my != cur_my) {
+            down_vec = arcballVector(vec2(last_mx, last_my));
+            up_vec = arcballVector(vec2(cur_mx, cur_my));
+
+            float deltaTheta;
+            deltaTheta = acos(dot(up_vec, down_vec));
+            teapot->worldMatrix= rotate(teapot->worldMatrix, deltaTheta, vec3(inverse(mat3(camera->viewMatrix)*mat3(teapot->worldMatrix))*cross(down_vec, up_vec)));
+
             last_mx = cur_mx;
             last_my = cur_my;
+            if(firstThetaFlag) {
+                first_down_vec = down_vec;
+                firstThetaFlag = false;
+            }
         }
     }
+    if(Touch::motion == Touch::Motion::UP) {
+        if(firstUpFlag) {
+            firstUpFlag = false;
+            Touch::position.x = 0;
+            Touch::position.y = 0;
+            last_mx = 0;
+            cur_mx = 0;
+            last_my = 0;
+            cur_my = 0;
 
+            float fullTheta = acos(dot(up_vec, first_down_vec));
+            float fullDegree = degrees(fullTheta);
+            __android_log_print(ANDROID_LOG_DEBUG, "Motion::UP",
+                                "last_mx=%f, last_my=%f, cur_mx=%f, cur_my=%f", last_mx, last_my, cur_mx,
+                                cur_my);
+            __android_log_print(ANDROID_LOG_DEBUG, "delta_theta",
+                                "deltaDegree=%f",
+                                fullDegree);
+        }
+    }
 }
 
 vec3 Scene::arcballVector(vec2 position) {
-    vec3 P = vec3(1.0 * position.x/Screen::width * 2 - 1.0,
+    vec3 point = vec3(1.0 * position.x/Screen::width * 2 - 1.0,
                   1.0 * position.y/Screen::height * 2 - 1.0,
                   0);
-    P.y = -P.y;
-    float OP_squared = P.x * P.x + P.y * P.y;
-    if (OP_squared <= 1*1)
-        P.z = sqrt(1*1 - OP_squared);
+    point.y = -point.y;
+    float pw = point.x * point.x + point.y * point.y;
+    if (pw <= 1*1)
+        point.z = sqrt(1*1 - pw);
     else
-        P = normalize(P);
+        point = normalize(point);
 
-    return P;
+    return point;
 }
-
